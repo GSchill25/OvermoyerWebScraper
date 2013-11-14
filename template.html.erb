@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="The Informants">
+        <meta name="keywords" content="Overmoyer, bikes, bicycle, information systems">
+        <meta name="description" content="Analysis of Overmoyer Competitors">
+        
+        <link rel="stylesheet" href="stylesheets/style.css" type="text/css" media="screen" charset="utf-8">
+        
+        <title>Analysis of Overmoyer Competitors</title>
+    </head>
+    
+    <body>
+        <h1>Analysis of Overmoyer Competitors</h1>
+        
+        <% @content.each do |competitor| %>
+            <% competitor.each do |key, value| %>
+                <% if key == :name %>
+                    <h2><%= value %></h2>
+                <% elsif key == :stock %>
+                    <h3>Stock Price: $<%= value %> per share</h3>
+                <% elsif key == :mission %>
+                    <h3>Mission:</h3>
+                    <p><%= value %></p>
+                <% elsif key == :news %>
+                    <h3>Recent News:</h3>
+                    <p><%= value %></p>
+                <% elsif key == :products %>
+                    <h3>Recent Products:</h3>
+                    <p><%= value %></p>
+                <% else %>
+                    <h3>Other Notes:</h3>
+                    <p><%= value %></p>
+                <% end %>
+                <%= "\n" %>
+            <% end %>
+        <% end %>
+        
+    </body>
+    
+</html>

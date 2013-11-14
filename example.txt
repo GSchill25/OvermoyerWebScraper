@@ -1,0 +1,20 @@
+Name Company One
+Stock 159
+Mission Some bullshit about a corporate mission.
+News In recent news, this company is about to do a very big thing.
+Products Item One and Item Three about to be released.
+Misc Some more company bullshit.
+
+Name Company Two
+Stock 259
+Mission Some bullshit about a corporate mission.
+News In recent news, this company is about to do a very big thing.
+Products Item One and Item Three about to be released.
+Misc Some more company bullshit.
+
+Name Company Three
+Stock 359
+Mission Some bullshit about a corporate mission.
+News In recent news, this company is about to do a very big thing.
+Products Item One and Item Three about to be released.
+Misc Some more company bullshit.
