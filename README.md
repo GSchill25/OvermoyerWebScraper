@@ -1,4 +1,4 @@
 OvermoyerWebScraper
 ===================
 
-Python Web Scraper for Overmoyer Bicycles Inc.
+Python Web Scraper and text formatter for Overmoyer Bicycles Inc.

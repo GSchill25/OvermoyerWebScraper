@@ -48,7 +48,7 @@ class FormatTool
   
   def generate_text_file
     File.open(@destination, "a") do |dest|
-      TextFile.new(@content, dest).save
+      Writer.new(@content, dest).save
     end
   end
   
@@ -78,7 +78,7 @@ class FormatTool
   
 end
 
-class TextFile
+class Writer
   
   def initialize(content, destination)
     @content = content
