@@ -20,24 +20,35 @@ class FormatTool
   
   def parse_info
     competitor = Hash.new
+    current = nil
     
     File.foreach(@source) do |row|
       
-      if row == "\n"
+      if row =~ /^End/
         @content << competitor
         competitor = Hash.new
       elsif row =~ /^Name/
         competitor[:name] = get_name(row)
+        current = :name
       elsif row =~ /^Stock/
         competitor[:stock] = get_stock(row)
+        current = :stock
       elsif row =~ /^Mission/
         competitor[:mission] = get_mission(row)
+        current = :mission
       elsif row =~ /^News/
         competitor[:news] = get_news(row)
+        current = :news
       elsif row =~ /^Products/
         competitor[:products] = get_products(row)
-      else
+        current = :products
+      elsif row =~ /^Misc/
         competitor[:misc] = get_misc(row)
+        current = :misc
+      elsif row == "\n"
+        competitor[current] << "<br /><br />"
+      else
+        competitor[current] << row
       end
       
     end
