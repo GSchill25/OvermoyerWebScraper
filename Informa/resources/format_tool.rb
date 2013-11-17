@@ -7,7 +7,8 @@ require "erb"
 
 class FormatTool
   
-  def initialize(source, destination)
+  def initialize(path, source, destination)
+    @path = path
     @source = source
     @destination = destination
     @content = []
@@ -59,7 +60,7 @@ class FormatTool
   
   def generate_text_file
     File.open(@destination, "a") do |dest|
-      Writer.new(@content, dest).save
+      Writer.new(@path, @content, dest).save
     end
   end
   
@@ -91,10 +92,10 @@ end
 
 class Writer
   
-  def initialize(content, destination)
+  def initialize(path, content, destination)
     @content = content
     @destination = destination
-    @template = File.open("template.html.erb", "r").read
+    @template = File.open(path + "template.html.erb", "r").read
   end
 
   def save
@@ -105,8 +106,8 @@ class Writer
 end
 
 if __FILE__ == $0
-  source, destination = ARGV
+  path, source, destination = ARGV
   
-  formatter = FormatTool.new(source, destination)
+  formatter = FormatTool.new(path, source, destination)
   formatter.run
 end
