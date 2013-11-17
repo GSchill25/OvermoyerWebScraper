@@ -31,12 +31,13 @@ class AppDelegate
   def save_to(sender)
     save_browser = NSSavePanel.savePanel
     save_browser.canChooseFiles = false
-    save_browser.canChooseDirectories = true
+    save_browser.canChooseDirectories = false
     save_browser.allowsMultipleSelection = false
+    save_browser.nameFieldStringValue = "untitled.html"
       
     save_browser.beginSheetModalForWindow(@mainWindow, completionHandler:nil)
     if save_browser.runModal == NSFileHandlingPanelOKButton
-      puts save_browser.filename
+      @save_dest = save_browser.filename
       # @save_dest = fix_str(save_browser.URLs.first.path)
       NSApp.endSheet(save_browser)
     end
@@ -46,14 +47,40 @@ class AppDelegate
     @run_button = NSButton.alloc.initWithFrame(NSMakeRect(90, 100, 140, 24))
     @run_button.title = "Generate Report"
     @run_button.setFont(NSFont.systemFontOfSize(13))
-    @run_button.action = :"run:" 
+    @run_button.action = :"run:"
     @run_button.target = self
-    @run_button.bezelStyle = NSRoundedBezelStyle 
+    @run_button.bezelStyle = NSRoundedBezelStyle
     @mainWindow.contentView.addSubview(@run_button)
   end
   
   def run(sender)
-    puts "run!"
+    if @save_dest == ""
+      print_warning
+    else
+      path = fix_str(NSBundle.mainBundle.bundleURL.path) + "/Contents/Resources/"
+      `ruby #{path}format_tool.rb #{path} #{path}plaintext.txt #{@save_dest}`
+    end
+  end
+  
+  def print_warning
+    title = "ERROR"
+    msg = "Please enter a valid save destination."
+    alert = NSAlert.alertWithMessageText(title, defaultButton: "Dismiss",
+                                         alternateButton: nil, otherButton: nil,
+                                         informativeTextWithFormat: msg)
+    alert.alertStyle = 2
+    alert.beginSheetModalForWindow(@mainWindow, modalDelegate:self,
+                                   didEndSelector: nil, contextInfo:nil)
+    NSApp.endSheet(alert)
+  end
+  
+  def fix_str(string)
+    if string.include?(" ")
+      str_copy = string + ""
+      str_copy.gsub!(/\s/, '\\ ')
+    else
+      string
+    end
   end
   
 end
