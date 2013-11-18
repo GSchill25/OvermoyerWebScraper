@@ -182,6 +182,23 @@ def readStockPage(ticker):
                         ticker+=str(char)
         return ticker
 
+def eliminateStrayTags(compiled):
+    startTag="<"
+    endTag=">"
+    strayTags=26
+    while strayTags>0:
+        startIndex=compiled.find(startTag)
+        endIndex=compiled.find(endTag)
+        if(startIndex>endIndex):
+            strayTags-=1
+            continue
+        tempFront=compiled[:startIndex]
+        tempBack=compiled[endIndex+len(endTag):]
+        compiled=tempFront+tempBack
+        strayTags-=1
+    compiled=compiled.replace("<br>","")
+    compiled=compiled.replace('<a href="/publish/content/global_cycle/en/us/index/news_and_info/news/ultegra_get_best_trickle.html">...</a>',"")
+    return compiled
 
 def getInfo(): #main
         company="Name K2bikes"
@@ -204,6 +221,8 @@ def getInfo(): #main
         missionStatement2+"\n" + news2+"\n" + products2+"\n" +
         "end"+"\n" + company3+"\n" + stock3+"\n" +
         missionStatement3+"\n" + news3+"\n" + products3+"\n" + "end")
+        compiled=eliminateStrayTags(compiled)
+        print compiled
         textFile=open("output.txt", "w")
         textFile.write(compiled)
 
