@@ -29,13 +29,9 @@ def readWebPageNews(page):
                     headings+=mutableHtml[:endIndex]
                     headings+="\n"
                     mutableHtml=mutableHtml[endIndex+len(endTagTwo):]
-        tagStart="<"
-        tagEnd=">"
-        '''while headings.find(tagStart)!=-1:
-                tagStartIndex=headings.find(tagStart)
-                tagEndIndex=headings.find(tagEnd)
-                headings=headings[:tagStartIndex] + headings[tagEndIndex:]'''
         headings="News "+headings
+        removeLength=36
+        headings=headings[:len(headings)-removeLength]
         return headings
 
 def readWebPageProducts(page):
