@@ -203,9 +203,11 @@ def getInfo(): #main
         missionStatement3=readWebPageMission3()
         news3=readWebPageNews3()
         products3=readWebPageProducts3()
-        compiled=(company + stock + missionStatement + news + products + "end"
-        + company2 + stock2 + missionStatement2 + news2 + products2 + "end" +
-        company3 + stock3 + missionStatement3 + news3 + products3 + "end")
+        compiled=(company+"\n" + stock+"\n" + missionStatement+"\n"+news+"\n" +
+        products+"\n" + "end"+"\n"+ company2+"\n" + stock2+"\n" +
+        missionStatement2+"\n" + news2+"\n" + products2+"\n" +
+        "end"+"\n" + company3+"\n" + stock3+"\n" +
+        missionStatement3+"\n" + news3+"\n" + products3+"\n" + "end")
         textFile=open("output.txt", "w")
         textFile.write(compiled)
 
