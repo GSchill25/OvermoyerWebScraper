@@ -196,8 +196,10 @@ def eliminateStrayTags(compiled):
         tempBack=compiled[endIndex+len(endTag):]
         compiled=tempFront+tempBack
         strayTags-=1
-    compiled=compiled.replace("<br>","")
-    compiled=compiled.replace('<a href="/publish/content/global_cycle/en/us/index/news_and_info/news/ultegra_get_best_trickle.html">...</a>',"")
+    if compiled.find("<br>")!=-1:
+        compiled=compiled.replace("<br>","")
+    if compiled.find('<a href="/publish/content/global_cycle/en/us/index/news_and_info/news/ultegra_get_best_trickle.html">...</a>')!=-1:
+        compiled=compiled.replace('<a href="/publish/content/global_cycle/en/us/index/news_and_info/news/ultegra_get_best_trickle.html">...</a>',"")
     return compiled
 
 def getInfo(): #main
@@ -222,7 +224,6 @@ def getInfo(): #main
         "end"+"\n" + company3+"\n" + stock3+"\n" +
         missionStatement3+"\n" + news3+"\n" + products3+"\n" + "end")
         compiled=eliminateStrayTags(compiled)
-        print compiled
         textFile=open("output.txt", "w")
         textFile.write(compiled)
 
