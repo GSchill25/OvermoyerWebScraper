@@ -108,7 +108,7 @@ def readWebPageMission2(page):
     startIndex=html.find(startTag)
     endIndex=html.find(endTag)
     mission+=html[startIndex+len(startTag):endIndex]
-    Mission="Mission " + mission
+    mission="Mission " + mission
     return mission
 
 def readWebPageNews3():
